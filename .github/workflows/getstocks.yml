@@ -24,4 +24,4 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run stocks.py
-      run: python stocks.py
+      run: python stonks.py
