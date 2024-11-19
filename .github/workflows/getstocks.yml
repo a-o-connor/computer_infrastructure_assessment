@@ -40,5 +40,5 @@ jobs:
         git push
       env:
         # Set this secret in your GitHub repository settings under "Secrets and variables" -> "Actions"
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
