@@ -10,10 +10,10 @@ permissions:
 
 jobs:
   run-script:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #Specify to use a Ubuntu virtual machine
 
     steps:
-    - name: Checkout Repo
+    - name: Checkout Repo #Clone the repository onto the virtual machine
       uses: actions/checkout@v3
 
     - name: Set up Python
@@ -21,7 +21,7 @@ jobs:
       with:
         python-version: '3.x' 
 
-    - name: Install Dependencies
+    - name: Install Dependencies #This step not required for bash script, requirements.txt is empty. 
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
@@ -29,18 +29,17 @@ jobs:
     - name: Run athenry_weather.sh
       run: ./athenry_weather.sh
 
-        # Step 5: Configure Git
     - name: Configure Git
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
 
-    # Step 6: Commit and push changes (if any)
     - name: Commit and Push Changes
       run: |
         git add -A
         git commit -m "Daily auto-run of athenry_weather.sh" || echo "No changes to commit"
         git push
+
       env:
         # Set this secret in your GitHub repository settings under "Secrets and variables" -> "Actions"
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
