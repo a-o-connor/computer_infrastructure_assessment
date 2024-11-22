@@ -1,4 +1,4 @@
-name: Run athenry_weather.sh Daily
+name: Run weather.sh Daily
 
 on:
   schedule:
@@ -26,8 +26,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run athenry_weather.sh
-      run: ./athenry_weather.sh
+    - name: Run weather.sh
+      run: ./weather.sh
 
     - name: Configure Git
       run: |
@@ -37,7 +37,7 @@ jobs:
     - name: Commit and Push Changes
       run: |
         git add -A
-        git commit -m "Daily auto-run of athenry_weather.sh" || echo "No changes to commit"
+        git commit -m "Daily auto-run of weather.sh" || echo "No changes to commit"
         git push
 
       env:
