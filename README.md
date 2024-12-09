@@ -31,4 +31,13 @@ This repository contains all assessment elements for the module **Computer Infra
     ````bash
     pip install -r requirements.txt
     ````
+- The Jupyter notebook can be opened in Google Colab by clicking on the link below:
+
+<br>
+
+<a target="_blank" href="https://colab.research.google.com/github/a-o-connor/computer_infrastructure_assessment/blob/main/weather.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
+<br>
 
