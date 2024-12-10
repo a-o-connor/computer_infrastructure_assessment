@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   run-script:
-    runs-on: ubuntu-22.04 #Specify to use a Ubuntu virtual machine
+    runs-on: ubuntu-22.04 #Ubuntu latest switched back to ubuntu 22 on Dec 5th see https://github.com/actions/runner-images/issues/10636
 
     steps:
     - name: Checkout Repo #Clone the repository onto the virtual machine
@@ -21,11 +21,6 @@ jobs:
       with:
         python-version: '3.x' 
 
-    # - name: Install Dependencies #This step not required for weather.sh
-    #   run: |
-    #     python -m pip install --upgrade pip
-    #     pip install -r requirements.txt
-
     - name: Run weather.sh
       run: ./weather.sh
 
@@ -33,13 +28,21 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
+  
+    - name: Set Commit Message
+      id: set-message
+      run: |
+        if [[ "${{ github.event_name }}" == "schedule" ]]; then
+          echo "commit_message=Scheduled daily auto-run of weather.sh" >> $GITHUB_ENV
+        elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          echo "commit_message=Manual run of weather.sh workflow" >> $GITHUB_ENV
+        fi
 
     - name: Commit and Push Changes
       run: |
         git add -A
-        git commit -m "Daily auto-run of weather.sh" || echo "No changes to commit"
+        git commit -m "$COMMIT_MESSAGE" || echo "No changes to commit"
         git push
 
       env:
-        # Set this secret in your GitHub repository settings under "Secrets and variables" -> "Actions"
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
