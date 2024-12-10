@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   run-script:
-    runs-on: ubuntu-latest #Specify to use a Ubuntu virtual machine
+    runs-on: ubuntu-22.04 #Specify to use a Ubuntu virtual machine
 
     steps:
     - name: Checkout Repo #Clone the repository onto the virtual machine
